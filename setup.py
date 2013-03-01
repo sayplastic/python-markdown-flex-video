@@ -8,4 +8,5 @@ setup(name='mdx_flex_video',
     author_email="cclarke@chrisdev.com",
     url="http://code.tylerlesmann.com/mdx_video2",
     py_modules = ["mdx_flex_video"],
+    install_requires=['Markdown'],
     )
