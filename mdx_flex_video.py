@@ -69,7 +69,7 @@ class Vimeo(markdown.inlinepatterns.Pattern):
 
 class Youtube(markdown.inlinepatterns.Pattern):
     def handleMatch(self, m):
-        url = 'http://www.youtube.com/v/%s' % m.group('youtubeargs')
+        url = 'http://www.youtube.com/embed/%s' % m.group('youtubeargs')
         joiner = '&amp;' if '?' in url else '?'
         url = joiner.join([url, 'wmode=opaque'])
         orientation=self.ext.config['orientation'][0]
