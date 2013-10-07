@@ -70,6 +70,8 @@ class Vimeo(markdown.inlinepatterns.Pattern):
 class Youtube(markdown.inlinepatterns.Pattern):
     def handleMatch(self, m):
         url = 'http://www.youtube.com/v/%s' % m.group('youtubeargs')
+        joiner = '&amp;' if '?' in url else '?'
+        url = joiner.join([url, 'wmode=opaque'])
         orientation=self.ext.config['orientation'][0]
         provider=self.ext.config['provider'][0]
         if provider.lower() == 'youtube':
@@ -85,7 +87,7 @@ class Youtube(markdown.inlinepatterns.Pattern):
                 
         return flex_video(url, width, height)
     
-def flex_video(url,width,height):
+def flex_video(url, width, height):
     """
     <div class="flex-video">
      <iframe width="420" height="315" src="http://www.youtube.com/embed/9otNWTHOJi8" frameborder="0" allowfullscreen></iframe>
@@ -94,10 +96,10 @@ def flex_video(url,width,height):
     obj=etree.Element('div')
     obj.set('class',"flex-video")
     iframe=etree.Element('iframe')
-    iframe.set('width',width)
-    iframe.set('height',height)
-    iframe.set('src',url)
-    iframe.set('frameborder',"0")
+    iframe.set('width', width)
+    iframe.set('height', height)
+    iframe.set('src', url)
+    iframe.set('frameborder', "0")
     obj.append(iframe)
     return obj
     
